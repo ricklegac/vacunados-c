@@ -45,10 +45,21 @@ count_sorted_dosis = datos.groupby(['dosis']).count()
 count_sorted_dosis= count_sorted_dosis.sort_values(['nombre'],ascending=False)
 count_sorted_dosis  = count_sorted_dosis .drop(["nombre","apellido","cedula","descripcion_vacuna","actualizado_al","establecimiento"],axis=1)
 count_sorted_dosis.rename(columns={'fecha_aplicacion':'Cantidad'},inplace=True)
+count_sorted_dosis.reset_index()
+plt.tight_layout()
+count_sorted_dosis.plot.bar()
 
+'''CANTIDAD DE MENORES VACUNADOS'''
 menores=datos[datos.nombre == 'MENOR DE EDAD'].shape[0]
 
 
+#datos_fecha = counts_fechas.sort_values('fecha_aplicacion', ascending=True)
+plt.plot(counts_fechas.index.values, counts_fechas['Cantidad'])
+plt.xticks(rotation='vertical')
+plt.show()
+
+
+'''
 img = mpimg.imread('vacunatorio covid 2020.jpg')
 imgplot = plt.imshow(img)
 plt.show()
@@ -57,6 +68,7 @@ im = cv2.imread('vacunatorio covid 2020.jpg')
 im_resized = cv2.resize(im, (224, 224), interpolation=cv2.INTER_LINEAR)
 plt.imshow(cv2.cvtColor(im_resized, cv2.COLOR_BGR2RGB))
 plt.show()
+'''
 '''
 datos_fecha = datos['fecha_aplicacion']
 datos_cantidad_fecha = counts_fechas['establecimiento']
