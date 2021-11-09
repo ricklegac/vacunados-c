@@ -46,6 +46,9 @@ count_sorted_dosis= count_sorted_dosis.sort_values(['nombre'],ascending=False)
 count_sorted_dosis  = count_sorted_dosis .drop(["nombre","apellido","cedula","descripcion_vacuna","actualizado_al","establecimiento"],axis=1)
 count_sorted_dosis.rename(columns={'fecha_aplicacion':'Cantidad'},inplace=True)
 
+menores=datos[datos.nombre == 'MENOR DE EDAD'].shape[0]
+
+
 img = mpimg.imread('vacunatorio covid 2020.jpg')
 imgplot = plt.imshow(img)
 plt.show()
