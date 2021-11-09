@@ -1,6 +1,12 @@
 import pandas as pd 
 import numpy as np
 import perfplot
+import os
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.dates import DateFormatter
+import seaborn as sns
+import matplotlib.dates as dates
 datos=pd.read_csv("/home/rick/Downloads/vacunados.csv",sep=';',warn_bad_lines=False,header=0);
 descripcion=datos['descripcion_vacuna'].value_counts(ascending=True)
 print(type(datos))
@@ -24,9 +30,20 @@ perfplot.save(
     xlabel="Cantidad de vacunados",
 )'''
 descripcion.groupby(['Vacunas']).sum().plot(kind='pie', y='Cantidad', figsize=(10,10))
-
+plt.style.use('seaborn')
 datos['fecha_aplicacion']=pd.to_datetime(datos['fecha_aplicacion'])
+counts_fechas = datos.groupby(['fecha_aplicacion']).count().sort_values(['establecimiento'],ascending=False).head(100)
 
+datos_fecha = datos['fecha_aplicacion']
+datos_cantidad_fecha = counts_fechas['establecimiento']
+
+fechas= counts_fechas.set_index('nombre')
+fechas.plot(x_compat=True)
+locator.MAXTICKS = 100
+plt.gca().xaxis.set_major_locator(dates.DayLocator())
+plt.gca().xaxis.set_major_formatter(dates.DateFormatter('%d\n\n%a'))
+plt.gca().invert_xaxis()
+plt.gcf().autofmt_xdate(rotation=0, ha="center")
 #order_establecimientos = datos.sort_values(['establecimiento']).head(10)
 counts_establecimientos = datos.groupby(['establecimiento']).count()
 count_sorted_establecimiento = counts_establecimientos.sort_values(['nombre'],ascending=False)
