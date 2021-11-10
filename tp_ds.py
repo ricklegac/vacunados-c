@@ -11,7 +11,7 @@ import matplotlib.dates as dates
 
 
 '''LECTURA DE DATOS'''
-datos=pd.read_csv("/home/rick/Downloads/vacunados.csv",sep=';',warn_bad_lines=False,header=0);
+datos=pd.read_csv('C:/Users/jlezc/Documents/Tp ds/vacunados.csv',sep=';',warn_bad_lines=False,header=0);
 descripcion=datos['descripcion_vacuna'].value_counts(ascending=True)
 
 plt.style.use('seaborn')
@@ -60,6 +60,19 @@ count_sorted_dosis.plot.bar()
 menores=datos[datos.nombre == 'MENOR DE EDAD'].shape[0]
 datos.sort_values(['fecha_aplicacion'])
 lugar=datos.nombre.ne('MENOR DE EDAD').idxmax()
+
+
+'''CANTIDAD DE CASOS DE COVID-19 POR FECHA'''
+totalcases = pd.read_csv('C:/Users/jlezc/Documents/Tp ds/casos-paraguay.csv',sep=',',warn_bad_lines=False,header=0);
+totalcases = totalcases.drop(columns=['Country_code','WHO_region', 'Cumulative_cases', 'Cumulative_deaths'])
+casos_dia = totalcases.drop(columns=['New_deaths'])
+muertes_dia = totalcases.drop(columns=['New_cases'])
+print(totalcases)
+print(casos_dia)
+print(muertes_dia)
+
+
+
 
 
 
