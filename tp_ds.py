@@ -67,7 +67,6 @@ totalcases = pd.read_csv('C:/Users/jlezc/Documents/Tp ds/casos-paraguay.csv',sep
 totalcases = totalcases.drop(columns=['Country_code','WHO_region', 'Cumulative_cases', 'Cumulative_deaths'])
 casos_dia = totalcases.drop(columns=['New_deaths'])
 muertes_dia = totalcases.drop(columns=['New_cases'])
-print(totalcases)
 print(casos_dia)
 print(muertes_dia)
 
