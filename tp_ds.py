@@ -46,6 +46,7 @@ counts_fechas.groupby(['fecha_aplicacion']).sum().plot(kind='bar', y='Cantidad',
 
 
 
+
 '''DOSIS APLICADAS DISTRIBUCION'''
 count_sorted_dosis = datos.groupby(['dosis']).count()
 count_sorted_dosis= count_sorted_dosis.sort_values(['nombre'],ascending=False)
